@@ -1,0 +1,33 @@
+name: Docker CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Runs on any push to the main branch
+  pull_request:
+    branches:
+      - main  # Runs on PR to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Checks out your code
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3  # Configures Docker Buildx
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Docker Hub username
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub password
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .  # Path to Dockerfile (current directory)
+          push: true  # Push the image to Docker Hub
+          tags: your-dockerhub-username/devops-ci-cd:latest  # Tag format
