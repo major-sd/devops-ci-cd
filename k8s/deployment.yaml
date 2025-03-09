@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-ci-cd
+  labels:
+    app: devops-ci-cd
+spec:
+  replicas: 2  # Set replicas for scalability (you can change this)
+  selector:
+    matchLabels:
+      app: devops-ci-cd
+  template:
+    metadata:
+      labels:
+        app: devops-ci-cd
+    spec:
+      containers:
+        - name: devops-ci-cd
+          image: dockersd12/devops-ci-cd:latest  # Replace with your Docker Hub image
+          ports:
+            - containerPort: 5000  # Flask default port
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:   # Self-healing check
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:  # Ensures app is ready before traffic
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
