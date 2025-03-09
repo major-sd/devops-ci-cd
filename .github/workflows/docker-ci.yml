@@ -43,4 +43,4 @@ jobs:
         with:
           context: .  # Path to Dockerfile (current directory)
           push: true  # Push the image to Docker Hub
-          tags: dockersd12/devops-ci-cd:latest  # Tag format
+          tags: dockersd12/devops-ci-cd:${{ github.sha }}  # Tag format
