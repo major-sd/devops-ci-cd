@@ -44,8 +44,3 @@ jobs:
           context: .  # Path to Dockerfile (current directory)
           push: true  # Push the image to Docker Hub
           tags: dockersd12/devops-ci-cd:latest  # Versioning docker Tag
-
-      - name: Deploy to Minikube
-        run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
