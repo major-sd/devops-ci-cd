@@ -9,20 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Log in to Docker Hub
-        env:
-          DH_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DH_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-        run: echo "${DH_PASSWORD}" | docker login -u "${DH_USERNAME}" --password-stdin
-
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t dockersd12/devops-ci-cd:latest .
-          docker push dockersd12/devops-ci-cd:latest
 
   deploy:
     runs-on: ubuntu-latest
