@@ -16,4 +16,4 @@ def test_home(client):
     """Test if the home page returns 'Hello moto!'"""
     response = client.get('/')
     assert response.status_code == 200
-    assert response.data.decode() == "Hello SD!"
+    assert response.data.decode() == "Hello SDs!"
