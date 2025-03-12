@@ -13,8 +13,7 @@ def client():
     return app.test_client()
 
 def test_home(client):
-    """Test if the home page returns 'Hello, DevOps!'"""
+    """Test if the home page returns 'Hello moto!'"""
     response = client.get('/')
-    print("hello")
     assert response.status_code == 200
-    assert response.data.decode() == "Hello, DevOps!"
+    assert response.data.decode() == "Hello MOTO!"
