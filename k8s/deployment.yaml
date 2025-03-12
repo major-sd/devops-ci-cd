@@ -5,7 +5,7 @@ metadata:
   labels:
     app: devops-ci-cd
 spec:
-  replicas: 2  # Set replicas for scalability (you can change this)
+  replicas: 3  # Set replicas for scalability (you can change this)
   selector:
     matchLabels:
       app: devops-ci-cd
@@ -17,6 +17,7 @@ spec:
       containers:
         - name: devops-ci-cd
           image: dockersd12/devops-ci-cd:latest  # Replace with your Docker Hub image
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000  # Flask default port
           resources:
